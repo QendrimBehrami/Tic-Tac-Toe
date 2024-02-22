@@ -2,12 +2,19 @@ body {
   height: 100vh;
   margin: 0;
   display: grid;
-  grid-template-rows: auto 4rem;
+  grid-template-rows: 6rem auto 4rem;
   justify-items: center;
 
   font-family: "Architects Daughter", cursive;
   font-weight: 400;
   font-style: normal;
+}
+
+header {
+  font-size: 4rem;
+  align-items: end;
+  display: flex;
+  justify-content: center;
 }
 
 main {
@@ -17,20 +24,23 @@ main {
 }
 
 .board {
-  font-size: 8rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.6rem;
   background-color: black;
+  /* This looks nicer on mobile, but doesn't matter for desktop */
+  margin: 3rem;
 }
 
 .board-cell {
-  width: 10rem;
-  height: 10rem;
+  width: 12rem;
+  height: 12rem;
+  font-size: 10rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
+  cursor: pointer;
 }
 
 footer {
