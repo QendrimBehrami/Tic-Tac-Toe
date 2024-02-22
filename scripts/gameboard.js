@@ -19,8 +19,9 @@ class GameBoard {
 
         newCell.textContent = this.availableMarks[this.currentMark];
         newCell.written = true;
-        this.writeCounter++;
         this.checkWinner(id);
+        this.writeCounter++;
+
         this.currentMark = (this.currentMark + 1) % this.availableMarks.length;
       });
 
@@ -73,6 +74,12 @@ class GameBoard {
     // Column
     let column = id % 3;
     this.checkHelper(column, column + 3, column + 6);
+
+    // Check for Draw
+    if (this.writeCounter == 9) {
+      let text = "It's a draw !";
+      this.displayNewGameModal(text);
+    }
   }
 
   /**
@@ -82,31 +89,30 @@ class GameBoard {
    * @param {*} id3
    */
   checkHelper(id1, id2, id3) {
-    let text;
+    // Check for Winner
     if (
       this.cells[id1].textContent == this.cells[id2].textContent &&
       this.cells[id2].textContent == this.cells[id3].textContent
     ) {
-      text = `${this.availableMarks[this.currentMark]} wins !`;
+      let text = `${this.availableMarks[this.currentMark]} wins !`;
+      this.displayNewGameModal(text);
     }
+  }
 
-    // Draw
-    if (text === undefined && this.writeCounter == 9) {
-      text = "It's a draw !";
-    }
-
-    if (text) {
-      let modal = document.querySelector("#newGameModal");
-      let textElement = document.querySelector("#newGameModal > h1");
-      textElement.textContent = text;
-      modal.style["display"] = "flex";
-      requestAnimationFrame(() => {
-        modal.style.opacity = 1; // Fade in
-      });
-    }
+  displayNewGameModal(text) {
+    let modal = document.querySelector("#newGameModal");
+    let textElement = document.querySelector("#newGameModal > h1");
+    textElement.textContent = text;
+    modal.style["display"] = "flex";
+    requestAnimationFrame(() => {
+      modal.style.opacity = 1; // Fade in
+    });
   }
 }
 
+/**
+ * Abstraction for board cells
+ */
 class Cell {
   value;
   id;
