@@ -73,19 +73,36 @@ class GameBoard {
     // Column
     let column = id % 3;
     this.checkHelper(column, column + 3, column + 6);
-
-    // Check draw
-    if (this.writeCounter == 9) {
-      console.log("Draw");
-    }
   }
 
+  /**
+   * Helper function to check ids for win condition
+   * @param {H} id1
+   * @param {*} id2
+   * @param {*} id3
+   */
   checkHelper(id1, id2, id3) {
+    let text;
     if (
       this.cells[id1].textContent == this.cells[id2].textContent &&
       this.cells[id2].textContent == this.cells[id3].textContent
     ) {
-      console.log(`${this.availableMarks[this.currentMark]} wins`);
+      text = `${this.availableMarks[this.currentMark]} wins !`;
+    }
+
+    // Draw
+    if (text === undefined && this.writeCounter == 9) {
+      text = "It's a draw !";
+    }
+
+    if (text) {
+      let modal = document.querySelector("#newGameModal");
+      let textElement = document.querySelector("#newGameModal > h1");
+      textElement.textContent = text;
+      modal.style["display"] = "flex";
+      requestAnimationFrame(() => {
+        modal.style.opacity = 1; // Fade in
+      });
     }
   }
 }
