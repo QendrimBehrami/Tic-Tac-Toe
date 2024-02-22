@@ -54,6 +54,7 @@ footer {
 
 footer > a,
 footer > a:visited {
+  z-index: 1; /* Icon still clickable during modal */
   color: inherit;
   text-decoration: none;
   font-size: 2rem;
