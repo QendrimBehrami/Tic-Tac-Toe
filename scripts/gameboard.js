@@ -19,8 +19,8 @@ class GameBoard {
 
         newCell.textContent = this.availableMarks[this.currentMark];
         newCell.written = true;
-        this.checkWinner(id);
         this.writeCounter++;
+        this.checkWinner(id);
 
         this.currentMark = (this.currentMark + 1) % this.availableMarks.length;
       });
@@ -95,6 +95,7 @@ class GameBoard {
       this.cells[id2].textContent == this.cells[id3].textContent
     ) {
       let text = `${this.availableMarks[this.currentMark]} wins !`;
+      this.writeCounter += 10; // xdd
       this.displayNewGameModal(text);
     }
   }
